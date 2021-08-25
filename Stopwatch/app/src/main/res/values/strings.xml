@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Секундомер</string>
+    <string name="ActivityMain_name">Секундомер</string>
+
+    <string name="timer">00:00:00:00</string>
+
+    <string name="buttonStart">Старт</string>
+    <string name="buttonStop">Стоп</string>
+    <string name="buttonReset">Сбросить</string>
+</resources>

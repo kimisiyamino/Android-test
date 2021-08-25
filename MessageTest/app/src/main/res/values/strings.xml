@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Приложение</string>
+    <string name="activity01_name">Окно 1</string>
+    <string name="activity02_name">Окно 2</string>
+
+    <string name="button_name">Отправить в новую активность</string>
+    <string name="button2_name">Отправить отсюда вообще</string>
+    <string name="button3_name">Отправить далеко сам поймешь</string>
+    <string name="textEditText">Написать</string>
+
+
+    <string name="message"></string>
+
+    <string name="chooser">И ЧО КУДА БЛ</string>
+</resources>

@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">HB_fix</string>
+
+    <string name="title">HB</string>
+    <string name="button_start">start</string>
+
+    <string name="enter_name">Enter name:</string>
+    <string name="button_go">GO</string>
+
+    <string name="metro_text">Name открыл глаза. Name находится в метро и едет на "буньку". Но сейчас будет станция "Горчакова".</string>
+    <string name="way_gorchakova">Выйти на Горчакова</string>
+    <string name="way_buninskaya">Выйти на Бунинской</string>
+    <string name="way_back">Поехать обратно</string>
+
+    <string name="familiar_text">Name вышел на Горчакова. По пути Name встречает знакомого…</string>
+    <string name="way_familiar">Пойти с ним</string>
+    <string name="way_away">Пройти мимо</string>
+
+    <string name="train_text1">Name поехал обратно в центр. Name не знал, зачем он это сделал. Возможно Name был просто упорот, ведь он ехал домой, но он совсем потерялся в своей голове…</string>
+    <string name="button_next_train">Next…</string>
+    <string name="train_text2">Думая, зачем Name поехал обратно, он залез в очень глубокие мысли. И пришёл к выводу, что смысла жизни нет.</string>
+    <string name="way_dieTracks">Прыгнуть под поезд</string>
+
+    <string name="dieTrack_text">Name прыгнул под поезд. Name совсем забыл, что сегодня у него День Рождения, но возможно смерть путём самоубийства и было для него лучшим подарком.</string>
+    <string name="way_home">GG</string>
+
+    <string name="familiar2_text">Это был местный солевой барыга. Хотя поначалу Name думал, что это его друг. Вы двинулись в неизвестном направлении, но Name чувствовал нечто особенное…</string>
+    <string name="way_familiarnext">Идти дальше с ним</string>
+    <string name="way_familiarToHome">Уйти домой</string>
+
+    <string name="bookmark_text">Name вышел на Бунинской. По пути валялась закладка.</string>
+    <string name="way_take">Взять</string>
+
+    <string name="toHome_text">Дом - это всё. Усталый от всего Name думал о том, как тяжела жизнь. И чтобы утешить себя, Name решил взять своего любимого пива</string>
+    <string name="way_toHome">Пойти Домой</string>
+    <string name="way_vernii">Пойти за пивом</string>
+
+    <string name="dieTruck_text1">Name очень хотел пиво, он думал и мечтал об этом, ведь это всегда решало его проблемы. Но что-то вдруг отвлекло нашего героя, появился яркий свет. Он был настолько белый, как-будто сам Господь спустился с небес…</string>
+    <string name="dieTrack2_text">Но оказалось - это просто был свет фар грузовика. И Name умер, прямо в свой День рождения, и он больше никогда не сможет купить своё любимое пиво и отпраздновать свой день рождения.</string>
+
+    <string name="forest_text">Вы пришли в лес, и барыга начал снимать штаны. Похоже он хотел совершить что-то крайне грязное, и это вовсе был и не барыга…</string>
+    <string name="way_run">Убежать</string>
+    <string name="way_stay">Остаться</string>
+
+    <string name="dieF_text">Name попытался убежать, но сразу же споткнулся об первый сук. Маньяк изнасиловал тебя до смерти, и Name погиб в мучениях.. а может и от кайфа. Не это ли лучший День Рождения?</string>
+
+    <string name="stay_text">В прочем, ему просто приспичило в туалет, а после он и вовсе куда-то скрылся. Name решает отправиться в обратную сторону.</string>
+
+    <string name="call_text">Name купил своё любимое пиво, и вдруг зазвонил мобильный с неизвестного номера.</string>
+    <string name="way_yes">Взять трубку</string>>
+    <string name="way_no">Проигнорировать</string>>
+
+    <string name="dieCall_text">Name пытался разобрать набор фраз в трубке, как вдруг трубку кто-то отбирает, а вся привычная реальность превращается в психиатрическую больницу. На самом деле Name уже давно сошёл с ума, и всё что происходило с ним, ему привидилось</string>
+
+    <string name="bookmark2_text">"Ну зачем мне кому-то отвечать?" - Подумал Name. - "У меня есть пиво и.." - Его взор пал на синий свёрток, что валялся практически посреди дороги… </string>
+    <string name="dieUnk_text">Это было странно. Очень странно. Но Name умер. Да, просто умер. Умер в свой День Рождения. Возможно, у него остановилось сердце, бутылка пива разбилась об асфальт, и он так и не узнал, что лежало в том свёртке…</string>
+
+    <string name="drug_text">Нашему герою нетерпелось узнать, что же там внутри. У него было только два пути, и он выбрал - </string>
+    <string name="way_entrance">Подъезд</string>
+    <string name="way_street">Улица</string>
+
+    <string name="dieEntCops_text">Войдя в подъезд, Name стал разворачивать непонятный свёрток, как вдруг в тоже время в том же месте оказались сотрудники полиции. Это был не самый лучший день для Name, но возможно самый лучший подарок на День Рождения.</string>
+    <string name="dieStreetCops_text">Потерявший страх Name, решил развернуть свёрток на месте, не замечая, как мимо проезжали сотрудники полиции. Это был не самый лучший день для Name, но возможно самый лучший подарок на День Рождения.</string>
+    <string name="complete_text">Постой, постой… Мы же уже знаем эту концовку? Нее, так не прокатит, давай заново</string>
+    <string name="Fullcomplete_text">Похоже, тебе уже нет смысла играть в эту игру, раз ты добрался сюда, так что давай, уходи отсюда, а лучше удали это приложение, здесь больше нет ничего нового</string>
+</resources>

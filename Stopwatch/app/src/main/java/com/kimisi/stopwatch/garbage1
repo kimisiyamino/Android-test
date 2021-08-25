@@ -1,0 +1,542 @@
+package com.kimisi.stopwatch;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+
+/*public class MainActivity extends AppCompatActivity {
+    //private long seconds;
+    //private boolean isRunning;
+   // private boolean isRunningLater;
+
+    private Handler handler;
+    private TextView timerText;
+
+    private long firstTime = 0L;
+    private long secondTime = 0L;
+    private long savePauseTime = 0L;
+    protected long updateTime = 0L;
+
+    private long startTimeSaved = 0L;
+
+    private final String fileName = "Nosolog.HUI";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        setTitle(getString(R.string.ActivityMain_name));
+        handler = new Handler();
+        timerText = (TextView)findViewById(R.id.timer);
+
+       if(savedInstanceState != null){
+            savePauseTime = savedInstanceState.getLong("savePauseTime");
+            isRunning = savedInstanceState.getBoolean("isRunning");
+
+            firstTime = SystemClock.uptimeMillis();
+            handler.post(timerUpdateThread);
+        }
+
+       loadFile();
+
+       // runTime();
+    }
+
+   @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        savePauseTime += secondTime;
+        savedInstanceState.putLong("savePauseTime", savePauseTime);
+        savedInstanceState.putBoolean("isRunning", isRunning);
+
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        saveInFile();
+        handler.removeCallbacks(timerUpdateThread);
+        Log.d("message","УНИЧТОЖИЛОСЬ");
+    }
+
+  /*  @Override
+    protected void onStop(){
+        super.onStop();
+        saveInFile();
+        Log.d("message","УНИЧТОЖИЛОСЬ");
+    }*/
+/*
+    public void onClickStart(View view){
+        if(!isRunning) {
+            isRunning = true;
+            firstTime = SystemClock.uptimeMillis();
+            handler.post(timerUpdateThread);
+        }
+    }
+    public void onClickStop(View view){
+        if(isRunning) {
+            isRunning = false;
+            savePauseTime += secondTime;
+            handler.removeCallbacks(timerUpdateThread);
+        }
+    }
+    @SuppressLint("SetTextI18n")
+    public void onClickReset(View view){
+        isRunning = false;
+        handler.removeCallbacks(timerUpdateThread);
+        timerText.setText("00:00:00");
+
+        savePauseTime=0L;
+        firstTime = 0L;
+        secondTime = 0L;
+        updateTime = 0L;
+        startTimeSaved = 0L;
+    }
+
+    private void saveInFile(){
+        if(isRunning || isRunningLater)
+            startTimeSaved = SystemClock.uptimeMillis();
+
+        savePauseTime += secondTime;
+        /*
+        try {
+            // отрываем поток для записи
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput(FILENAME, MODE_PRIVATE)));
+            // пишем данные
+            bw.write(String.valueOf(startTimeSaved) + " " + String.valueOf(savePauseTime));
+            // закрываем поток
+            Log.d("message", "ФАЙЛ СОХРАНЕН ЕПТ НАХ");
+
+            bw.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+/*
+       try{
+            String startTimeSavedString = String.valueOf(startTimeSaved);
+            String savePauseTimeString = String.valueOf(savePauseTime);
+            String isRunningString = String.valueOf(isRunning);
+            String isRunningLaterString = String.valueOf(isRunningLater);
+
+            BufferedWriter fileOutput = new BufferedWriter(new OutputStreamWriter(openFileOutput(fileName, MODE_PRIVATE)));
+
+            fileOutput.write(startTimeSavedString + "\n");
+            fileOutput.write(savePauseTimeString + "\n");
+            fileOutput.write(isRunningString + "\n");
+            fileOutput.write(isRunningLaterString + "\n");
+            fileOutput.close();
+
+            Log.d("message","СОХРАНИЛОСЬ");
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void loadFile(){
+
+        try{
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(openFileInput(fileName)));
+
+            StringBuilder strBuffer = new StringBuilder();
+
+            String lines;
+            while((lines = buffer.readLine()) != null){
+                strBuffer.append(lines).append("\n");
+            }
+            buffer.close();
+            resumeApp(strBuffer.toString());
+
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void resumeApp(String strBuffer){
+        Log.d("strBuffer", strBuffer);
+
+        String[] values = strBuffer.split("\n");
+
+        startTimeSaved = Long.parseLong(values[0]);
+        savePauseTime = Long.parseLong(values[1]);
+        isRunning = Boolean.parseBoolean(values[2]);
+        isRunningLater = Boolean.parseBoolean(values[3]);
+
+        if(isRunningLater)
+            savePauseTime = (SystemClock.uptimeMillis() - startTimeSaved) + savePauseTime;
+
+        firstTime = SystemClock.uptimeMillis();
+        handler.post(timerUpdateThread);
+    }
+
+    /*public void runTime(){
+
+        handler.post(new Runnable(){
+            @Override
+            public void run() {
+
+                //long sec = seconds%60;
+                //long min = seconds / 60 %60;
+                //long h = seconds / (60*60*100);
+
+                long sec = (seconds%6000)/100;
+                long min = (seconds%360000)/6000;
+                long h = seconds / 360000;
+                long mills = seconds % 100;
+
+                TextView timer = (TextView)findViewById(R.id.timer);
+                @SuppressLint("DefaultLocale") String time = String.format("%02d:%02d:%02d:%02d", h, min, sec, mills);
+                timer.setText(time);
+                if(isRunning)
+                    seconds++;
+
+                handler.postDelayed(this, 1);
+            }
+        });
+    }*/
+/*
+    Runnable timerUpdateThread = new Runnable() {
+        @SuppressLint("DefaultLocale")
+        @Override
+        public void run() {
+            secondTime = SystemClock.uptimeMillis() - firstTime;
+
+            updateTime = savePauseTime + secondTime;
+
+            int seconds =       (int)(updateTime / 1000) % 60;
+            int min =           (int) updateTime / (60 * 1000) % 60;
+            int hours =         (int) updateTime / (60 * 60 * 1000);
+            int milliseconds =  (int)(updateTime % 1000) / 10;
+            String formatTextTimer;
+
+            if(hours != 0)
+                formatTextTimer = String.format("%02d:%02d:%02d:%02d", hours, min, seconds, milliseconds);
+            else
+                formatTextTimer = String.format("%02d:%02d:%02d", min, seconds, milliseconds);
+
+            timerText.setText(formatTextTimer);
+            if(isRunning)
+                handler.postDelayed(this, 0);
+        }
+    };
+}*/
+
+public class MainActivity extends AppCompatActivity {
+
+    protected String stateStopWatch = "stopped";
+    protected Handler handler;
+    protected TextView timerText;
+
+    protected long firstTime = 0L;
+    protected long pastTime = 0L;
+    protected long saveTime = 0L;
+    protected long updateTime = 0L;
+
+    protected long exitTime = 0L;
+    //final String fileName = "preferences";
+
+    private FloatingActionButton fabButtonStart;
+    private FloatingActionButton fabButtonPause;
+    private FloatingActionButton fabButtonStop;
+
+    private Animation animShowFab, animHideFab, animSnusRotateR, animSnusRotateL;
+
+    ArrayList<Integer> imageSnusList;
+    ImageView imageSnus;
+    int numOfImage;
+
+    DataManage dataManage;
+    ImagesSnus imagesSnus;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        setTitle(getString(R.string.ActivityMain_name));
+
+        handler = new Handler();
+
+        // ПОЛУЧАЕМ TIMER
+        timerText = (TextView)findViewById(R.id.timer);
+        timerText.setMaxLines(1);
+
+        dataManage = new DataManage();
+        dataManage.onCreateActivity(this);
+
+        animShowFab = AnimationUtils.loadAnimation(this, R.anim.fab_show);
+        animHideFab = AnimationUtils.loadAnimation(this, R.anim.fab_hide);
+
+        fabButtonStart = (FloatingActionButton)findViewById(R.id.ButtonStart);
+        fabButtonPause = (FloatingActionButton)findViewById(R.id.ButtonPause);
+        fabButtonStop = (FloatingActionButton)findViewById(R.id.ButtonStop);
+
+        imagesSnus = new ImagesSnus();
+        imageSnus = (ImageView)findViewById(R.id.imageView);
+        imageSnusList = imagesSnus.createImageList();
+
+        // === Способ загрузки №1 - метод Save
+        /*if(savedInstanceState != null){
+            saveTime = savedInstanceState.getLong("saveTime");
+            stateStopWatch = savedInstanceState.getString("stateStopWatch");
+
+            assert stateStopWatch != null;
+            if(stateStopWatch.equals("started"))
+                firstTime = SystemClock.uptimeMillis();
+
+            handler.post(timeUpdateThread);
+        }*/
+
+        // === Способ загрузки №2 - метод File
+        /*try{
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(openFileInput(fileName)));
+            StringBuilder strBuffer = new StringBuilder();
+            String lines;
+            while((lines = buffer.readLine()) != null){
+                strBuffer.append(lines).append("\n");
+            }
+            buffer.close();
+            Log.d("message","Загрузилось");
+            resume(strBuffer.toString());
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }*/
+
+        if(stateStopWatch.equals("started")){
+            fabButtonStart.startAnimation(animHideFab);
+        }
+        else if(stateStopWatch.equals("pause")){
+            fabButtonPause.startAnimation(animHideFab);
+        }else{
+            fabButtonPause.startAnimation(animHideFab);
+            fabButtonStop.startAnimation(animHideFab);
+        }
+    }
+
+    // === Способ сохранения №1 - метод Save
+   /* @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        saveTime += pastTime;
+        savedInstanceState.putLong("saveTime", saveTime);
+        savedInstanceState.putString("stateStopWatch", stateStopWatch);
+        handler.removeCallbacks(timeUpdateThread);
+    }
+*/
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        exitTime = System.currentTimeMillis();
+        saveTime += pastTime;
+
+        // === Способ сохранения №2 - метод File
+        /*
+        try{
+            BufferedWriter fileOutput = new BufferedWriter(new OutputStreamWriter(openFileOutput(fileName, MODE_PRIVATE)));
+            fileOutput.write(String.valueOf(exitTime) + "\n");
+            fileOutput.write(String.valueOf(saveTime) + "\n");
+            fileOutput.write(stateStopWatch + "\n");
+            fileOutput.close();
+
+            Log.d("message","СОХРАНИЛОСЬ");
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }*/
+        dataManage.onDestroyActivity();
+
+        handler.removeCallbacks(timeUpdateThread);
+    }
+
+    public void onClickStart(View view){
+        if(stateStopWatch.equals("pause")){
+            fabButtonStart.startAnimation(animHideFab);
+            fabButtonPause.startAnimation(animShowFab);
+        }
+        else if(stateStopWatch.equals("stopped")){
+            fabButtonStart.startAnimation(animHideFab);
+            fabButtonPause.startAnimation(animShowFab);
+            fabButtonStop.startAnimation(animShowFab);
+        }
+
+        if(stateStopWatch.equals("stopped") || stateStopWatch.equals("pause")) {
+            stateStopWatch = "started";
+            firstTime = System.currentTimeMillis();
+
+            handler.post(timeUpdateThread);
+            handler.post(imageUpdateThread);
+
+            //imageSnus.setAnimation(animSnusRotateR);
+        }
+    }
+
+    public void onClickPause(View view){
+        if(stateStopWatch.equals("started")){
+            fabButtonStart.startAnimation(animShowFab);
+            fabButtonPause.startAnimation(animHideFab);
+        }
+
+        if(stateStopWatch.equals("started")) {
+
+            stateStopWatch = "pause";
+            saveTime += pastTime;
+            pastTime = 0L;
+
+            handler.removeCallbacks(timeUpdateThread);
+
+            handler.removeCallbacks(imageUpdateThread);
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void onClickReset(View view){
+        if(stateStopWatch.equals("started")){
+            fabButtonStart.startAnimation(animShowFab);
+            fabButtonPause.startAnimation(animHideFab);
+            fabButtonStop.startAnimation(animHideFab);
+        }
+        else if(stateStopWatch.equals("pause")){
+            fabButtonStart.startAnimation(animShowFab);
+            fabButtonStop.startAnimation(animHideFab);
+        }
+
+        if(stateStopWatch.equals("started") || stateStopWatch.equals("pause")) {
+
+            stateStopWatch = "stopped";
+            handler.removeCallbacks(timeUpdateThread);
+            timerText.setText("00:00:00");
+
+            firstTime = 0L;
+            pastTime = 0L;
+            saveTime = 0L;
+            updateTime = 0L;
+
+            handler.removeCallbacks(imageUpdateThread);
+        }
+    }
+
+    Runnable timeUpdateThread = new Runnable() {
+        @SuppressLint("DefaultLocale")
+        @Override
+        public void run() {
+
+            if(stateStopWatch.equals("started")) {
+                pastTime = System.currentTimeMillis() - firstTime;
+                updateTime = saveTime + pastTime;
+            }else updateTime = saveTime;
+
+            int sec = (int)(updateTime / 1000) % 60;
+            int min = (int) updateTime / (60 * 1000) % 60;
+            int hours = (int) updateTime / (60 * 60 * 1000);
+            int millis = (int)(updateTime % 1000) / 10;
+
+            String formatTextTimer;
+
+            if(hours != 0)
+                formatTextTimer = String.format("%02d:%02d:%02d:%02d", hours, min, sec, millis);
+            else
+                formatTextTimer = String.format("%02d:%02d:%02d", min, sec, millis);
+
+            timerText.setText(formatTextTimer);
+
+            handler.postDelayed(this, 0);
+        }
+    };
+
+    Runnable imageUpdateThread = new Runnable() {
+        @Override
+        public void run() {
+            numOfImage = (int)(Math.random()*61);
+            imageSnus.setImageResource(imageSnusList.get(numOfImage));
+            handler.postDelayed(this, 5000);
+        }
+    };
+
+    class DataManage{
+
+        private static final String FILE_preferences = "preferences";
+        private SharedPreferences preferences;
+
+        public void onCreateActivity(MainActivity Main){
+            preferences = Main.getSharedPreferences(FILE_preferences, Context.MODE_PRIVATE);
+
+            // === Способ загрузки №3 - метод SharedPreferences
+            if (preferences.contains("exitTime")) {
+                exitTime = preferences.getLong("exitTime", 0);
+            }
+            if (preferences.contains("saveTime")) {
+                saveTime = preferences.getLong("saveTime", 0);
+            }
+            if (preferences.contains("stateStopWatch")) {
+                stateStopWatch = preferences.getString("stateStopWatch", "");
+                resume();
+            }
+        }
+        public void onDestroyActivity(){
+            // === Способ сохранения №3 - метод SharedPreferences
+
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putLong("exitTime", exitTime);
+                editor.putLong("saveTime", saveTime);
+                editor.putString("stateStopWatch", stateStopWatch);
+                editor.apply();
+
+        }
+        public void resume(){
+        /*String[] values = buffer.split("\n");
+
+        exitTime = Long.parseLong(values[0]);
+        saveTime = Long.parseLong(values[1]);
+        stateStopWatch = values[2];*/
+
+            if(stateStopWatch.equals("started")) {
+                firstTime = System.currentTimeMillis();
+                saveTime = saveTime + (firstTime - exitTime);
+            }
+            handler.post(timeUpdateThread);
+            handler.post(imageUpdateThread);
+        }
+    }
+}

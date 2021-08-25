@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrainTwoActivity">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/train_text2"
+        android:gravity="center"
+        android:textSize="32sp"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/button_way1"
+        android:onClick="way_dieTracks"
+        android:layout_width="148dp"
+        android:layout_height="68dp"
+        android:text="@string/way_dieTracks"
+        android:layout_below="@+id/text"
+        android:layout_centerHorizontal="true"
+
+        />
+
+    <Button
+        android:id="@+id/button2"
+        android:onClick="way_back"
+        android:layout_width="148dp"
+        android:layout_height="68dp"
+        android:text="@string/way_back"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_way1" />
+
+</RelativeLayout>

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">drinks</string>
+    <string name="logo_description">logo</string>>
+    <string-array name="options">
+        <item>Энергетики</item>
+        <item>Водка</item>
+        <item>что-нибудь ещё</item>
+        <item>Чипсы</item>
+        <item>Пиво</item>
+        <item>ooo</item>
+        <item>Настройкм</item>
+        <item>Выход</item>
+        <item>блаблабла</item>
+        <item>гавагвагвга</item>
+        <item>оружие</item>
+        <item>игры</item>
+        <item>аааааа</item>
+        <item>фигня</item>
+        <item>ингтернет</item>
+        <item>музыка</item>
+        <item>рееклама</item>
+    </string-array>
+
+</resources>

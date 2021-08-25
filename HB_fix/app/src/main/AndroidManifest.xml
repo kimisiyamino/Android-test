@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kimisi.hb_fix">
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Win2StreetActivity"></activity>
+        <activity android:name=".Win1EntranceActivity" />
+        <activity
+            android:name=".FullCompleteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CompleteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DieCopsStreetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DieCopsEntranceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DieUnknownActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DrugActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BookmarkActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DieCallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DieFActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DieTruckActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DieTruckActivity1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ToHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BookmarkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Familiar2Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DieTrackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TrainTwoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TrainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FamiliarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MetroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EnterNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
